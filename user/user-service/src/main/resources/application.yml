@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/docker_microservice?useUnicode=true&characterEncoding=utf-8
+
+beetl-beetlsql:
+  dev: true
+beetlsql:
+  basePackage: io.github.hepan.docker.demo.user
+  dbStyle: org.beetl.sql.core.db.MySqlStyle
+beetl:
+  enabled: false  #开启页码beetl模板引擎
+
+
+
+dubbo:
+  application:
+    id: user-service
+    name: user-service  #应用名称
+    owner: hepan      #应用所属者
+    organization: hepan   #应用所属组织
+  registry:
+    id: zookeeper-registry #注册中心id
+    protocol: zookeeper    #注册中心协议
+    address: zookeeper://127.0.0.1:2181 #注册中心地址
+  metadata-report:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo   #协议名称
+    port: 20880   #协议端口
+    accesslog: dubbo-access.log #协议访问log
+  provider:
+    retries: 0    #重试次数
+    timeout: 3000 #超时时间
+  monitor:
+    protocol: registry # 注册监控中心
